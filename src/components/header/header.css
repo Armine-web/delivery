@@ -1,0 +1,38 @@
+.header {
+    height: 34vw;
+    margin: 30px auto;
+    background: url('/header-img.webp') no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius: 15px;
+}
+
+.header-contents {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5vw;
+    max-width: 50%;
+    bottom: 10%;
+    left: 6vw;
+    animation: fadeIn 3s;
+}
+
+@media (max-width: 1050px) {
+    .header {
+        height: 38vw;
+    }
+    .header-contents {
+        max-width: 45%;
+    }
+}
+
+@media (max-width: 750px) {
+    .header-contents {
+        max-width: 65%;
+    }
+    .header-contents .css-2hlg0i {
+        display: none;
+    }
+}
