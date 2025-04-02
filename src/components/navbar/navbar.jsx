@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
-import './navbar.css'
-import { assets } from '../../assets/assets'
+import React, { useState, useContext } from 'react';
+import './navbar.css';
+import { assets } from '../../assets/assets';
+import SearchBar from '../searchBar/searchBar'; 
 
-
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import { Button, Box, IconButton } from '@mui/material';
 
@@ -18,50 +18,72 @@ const CartBadge = styled(Badge)`
     top: -12px;
     right: -6px;
     background-color: #ff6600;
-    color: white
+    color: white;
   }
 `;
 
-function Navbar({setShowLogin}) {
+function Navbar({ setShowLogin, handleSearch, setSearchQuery }) {
+  const [menu, setMenu] = useState('home');
+  const [searchVisible, setSearchVisible] = useState(false);
+  const { cartItems } = useContext(StoreContext);
+  const totalItemsInCart = Object.values(cartItems).reduce((acc, quantity) => acc + quantity, 0);
 
-    const [menu, setMenu] = useState('home');
-    const {cartItems} = useContext(StoreContext);
-    const totalItemsInCart = Object.values(cartItems).reduce((acc, quantity) => acc + quantity, 0);
-    
+
+  const handleHomeClick = () => {
+    setSearchQuery(''); 
+    setSearchVisible(false); 
+    setMenu('home');
+  };
+
   return (
     <Box sx={{
-        padding: '20px 0px', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center'
-      }}>
-        <Link to={'/'} > <img src = {assets.logo} atl='logo' className='navbar-logo'/> </Link>
-        
-        <ul className='navbar-menu navbar'>
-            <Link to='/' onClick={()=> setMenu('home')} className={menu==='home'? 'active': ''}>Home</Link>
-            <a href ='#explore-menu' onClick={()=> setMenu('menu')} className={menu==='menu'? 'active': ''}>Menu</a>
-            <a href ='#app-download' onClick={()=> setMenu('mobile-app')}className={menu==='mobile-app'? 'active': ''}>Mobile-app</a>
-            <a href ='#footer' onClick={()=> setMenu('contact-us')} className={menu==='contact-us'? 'active': ''}>Contact Us</a>
-        </ul>
-        <div className="navbar-right">
-            <SearchIcon sx={{color: '#495579', fontSize: '28px'}}/>
-            <Link to="/cart">
-              <IconButton>
-                <ShoppingCartIcon sx={{ color: '#495579', fontSize: '28px' }} />
-                <CartBadge 
-  badgeContent={totalItemsInCart > 0 ? totalItemsInCart : null} 
-  overlap="circular" 
-/>
-              </IconButton>
-            </Link>
-            
-            
-            <Button onClick={(()=> setShowLogin(true))} variant="contained" sx={{backgroundColor: '#06b301', '@media (max-width: 1050px)': {
-              padding: '7px 15px'
-            },}}>Sign in</Button>
-        </div>
+      padding: '20px 0px', 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      alignItems: 'center'
+    }}>
+      <Link to={'/delivery/'} onClick={handleHomeClick}> 
+        <img src={assets.logo} alt='logo' className='navbar-logo'/> 
+      </Link>
+
+      <ul className='navbar-menu navbar'>
+        <Link to='/delivery/' onClick={handleHomeClick} className={menu === 'home' ? 'active' : ''}>Home</Link>
+        <a href='#explore-menu' onClick={() => setMenu('menu')} className={menu === 'menu' ? 'active' : ''}>Menu</a>
+        <a href='#app-download' onClick={() => setMenu('mobile-app')} className={menu === 'mobile-app' ? 'active' : ''}>Mobile-app</a>
+        <a href='#footer' onClick={() => setMenu('contact-us')} className={menu === 'contact-us' ? 'active' : ''}>Contact Us</a>
+      </ul>
+
+      <div className="navbar-right">
+        {searchVisible ? (
+          <SearchBar handleSearch={handleSearch} />
+        ) : (
+          <IconButton onClick={() => setSearchVisible(true)}>
+            <SearchIcon sx={{ color: '#495579', fontSize: '28px' }} />
+          </IconButton>
+        )}
+        <Link to="/cart">
+          <IconButton>
+            <ShoppingCartIcon sx={{ color: '#495579', fontSize: '28px' }} />
+            <CartBadge 
+              badgeContent={totalItemsInCart > 0 ? totalItemsInCart : null} 
+              overlap="circular" 
+            />
+          </IconButton>
+        </Link>
+
+        <Button 
+          onClick={() => setShowLogin(true)} 
+          variant="contained" 
+          sx={{
+            backgroundColor: '#06b301', 
+            '@media (max-width: 1050px)': { padding: '7px 15px' },
+          }}
+        >
+          Sign in
+        </Button>
+      </div>
     </Box>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
