@@ -10,14 +10,18 @@ import LoginPopup from './components/loginPopup/loginPopup'
 const App = () => {
 
   const [showLogin, setShowLogin] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
 
   return (
     <>
-    {showLogin ? <LoginPopup setShowLogin ={setShowLogin} /> : <></>}
+      {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : null}
       <div className='app'>
-        <Navbar setShowLogin = {setShowLogin}/>
+        <Navbar setShowLogin={setShowLogin} />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route 
+            path='/delivery' 
+            element={<Home showAbout={showAbout} setShowAbout={setShowAbout} />} 
+          /> 
           <Route path='/cart' element={<Cart />} />
           <Route path='/order' element={<PlaceOrder />} />
         </Routes>
@@ -28,4 +32,3 @@ const App = () => {
 }
 
 export default App
-
