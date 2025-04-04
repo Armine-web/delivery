@@ -1,12 +1,9 @@
 import React, { useState, useContext } from 'react';
 import './navbar.css';
 import { assets } from '../../assets/assets';
-import SearchBar from '../searchBar/searchBar'; 
-
+import SearchBar from '../searchBar/searchBar';
 import { Link } from 'react-router-dom';
-
 import { Button, Box, IconButton } from '@mui/material';
-
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { badgeClasses } from '@mui/material/Badge';
@@ -25,25 +22,19 @@ const CartBadge = styled(Badge)`
 function Navbar({ setShowLogin, handleSearch, setSearchQuery }) {
   const [menu, setMenu] = useState('home');
   const [searchVisible, setSearchVisible] = useState(false);
-  const { cartItems } = useContext(StoreContext);
+  const { cartItems } = useContext(StoreContext); 
   const totalItemsInCart = Object.values(cartItems).reduce((acc, quantity) => acc + quantity, 0);
 
-
   const handleHomeClick = () => {
-    setSearchQuery(''); 
-    setSearchVisible(false); 
+    setSearchQuery('');
+    setSearchVisible(false);
     setMenu('home');
   };
 
   return (
-    <Box sx={{
-      padding: '20px 0px', 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center'
-    }}>
-      <Link to={'/delivery/'} onClick={handleHomeClick}> 
-        <img src={assets.logo} alt='logo' className='navbar-logo'/> 
+    <Box sx={{ padding: '20px 0px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Link to={'/delivery/'} onClick={handleHomeClick}>
+        <img src={assets.logo} alt='logo' className='navbar-logo' />
       </Link>
 
       <ul className='navbar-menu navbar'>
@@ -64,18 +55,15 @@ function Navbar({ setShowLogin, handleSearch, setSearchQuery }) {
         <Link to="/cart">
           <IconButton>
             <ShoppingCartIcon sx={{ color: '#495579', fontSize: '28px' }} />
-            <CartBadge 
-              badgeContent={totalItemsInCart > 0 ? totalItemsInCart : null} 
-              overlap="circular" 
-            />
+            <CartBadge badgeContent={totalItemsInCart > 0 ? totalItemsInCart : null} overlap="circular" />
           </IconButton>
         </Link>
 
-        <Button 
-          onClick={() => setShowLogin(true)} 
-          variant="contained" 
+        <Button
+          onClick={() => setShowLogin(true)}
+          variant="contained"
           sx={{
-            backgroundColor: '#06b301', 
+            backgroundColor: '#06b301',
             '@media (max-width: 1050px)': { padding: '7px 15px' },
           }}
         >

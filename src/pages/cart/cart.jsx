@@ -7,12 +7,10 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-
-  const {cartItems, RecipeList, removeFromCart, getTotalAmount} = useContext(StoreContext);
-
+  const { cartItems, RecipeList, removeFromCart, getTotalAmount } = useContext(StoreContext);
   const navigate = useNavigate();
 
-    return (
+  return (
     <div className='cart'>
       <div className="cart-items">
         <div className="cart-items-title">
@@ -25,26 +23,24 @@ const Cart = () => {
         </div>
         <br />
         <hr />
-
+        
         {RecipeList.map((item) => {
           if (cartItems[item.id] > 0) {
             return (
-              <>
-                <div key={item.id} className="cart-items-title cart-items-item">
-                  <img className='cart-items-image' src={item.image} alt={item.name} />
-                  <p>{item.name}</p>
-                  <p>${item.servings}</p>
-                  <p>{cartItems[item.id]}</p>
-                  {console.log(cartItems[item.id])}
-                  <p className='cart-items-total'>$ {item.servings * cartItems[item.id]}</p>
-                  <DeleteIcon onClick={() => removeFromCart(item.id)} />
-                </div>
-                <hr />
-              </>
+              <div key={item.id} className="cart-items-title cart-items-item">
+                <img className='cart-items-image' src={item.image} alt={item.name} />
+                <p>{item.name}</p>
+                <p>${item.servings}</p>
+                <p>{cartItems[item.id]}</p>
+                <p className='cart-items-total'>$ {item.servings * cartItems[item.id]}</p>
+                <DeleteIcon onClick={() => removeFromCart(item.id)} />
+              </div>
             );
           }
+          return null;
         })}
       </div>
+
       <div className="cart-bottom">
         <div className="cart-total">
           <h2>Cart Totals</h2>
@@ -56,7 +52,7 @@ const Cart = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p> ${Number(getTotalAmount()) > 0 ? 2 : 0}</p>
+              <p>${Number(getTotalAmount()) > 0 ? 2 : 0}</p>
             </div>
             <hr />
             <div className="cart-total-details">
@@ -64,7 +60,8 @@ const Cart = () => {
               <b>${Number(getTotalAmount()) > 0 ? Number(getTotalAmount()) + 2 : 0}</b>
             </div>
           </div>
-          <Button onClick={()=>navigate('/order')}
+          <Button
+            onClick={() => navigate('/order')}
             sx={{
               color: '#ff6600',
               '&:hover': {
@@ -76,6 +73,7 @@ const Cart = () => {
             PROCEED TO CHECKOUT
           </Button>
         </div>
+
         <div className="cart-promocode">
           <div>
             <p>If you have promo code, Enter it here</p>
@@ -92,13 +90,11 @@ const Cart = () => {
                       },
                       '&.Mui-focused fieldset': {
                           borderColor: '#ff6600',
-                          
                       },
                   },
                   '& .MuiInputLabel-root': {
                       '&.Mui-focused': {
                           color: '#ff6600',
-                          
                       },
                   },
               }}
@@ -121,4 +117,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default Cart;
