@@ -27,3 +27,11 @@
     width: 100%;
     max-width: max(40%, 500px);
 }
+
+@media(max-width: 1050px) {
+    .place-order{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

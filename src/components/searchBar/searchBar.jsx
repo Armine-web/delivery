@@ -25,27 +25,33 @@ function SearchBar() {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <TextField
-        value={query}
-        onChange={handleChange}
-        variant="outlined"
-        size="small"
-        placeholder="Search..."
-        sx={{
-            marginRight: '8px',
-            '& .MuiOutlinedInput-root': {
-              borderRadius: '20px', 
-              '&:hover fieldset': {
-                borderColor: '#ff6600', 
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#ff6600',
-              },
-            },
-          }}
-      />
+   <TextField
+  value={query}
+  onChange={handleChange}
+  variant="outlined"
+  size="small"
+  placeholder="Search..."
+  sx={{
+    marginRight: '8px',
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '20px', 
+      '&:hover fieldset': {
+        borderColor: '#ff6600', 
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#ff6600',
+      },
+    },
+    '@media (max-width: 1200px)': {
+      width: '120px',
+    },
+    '@media (max-width: 750px)': {
+      width: '100px',
+    },
+  }}
+/>
       <IconButton onClick={handleSearchClick} sx={{ color: '#495579' }}>
-        <SearchIcon />
+        <SearchIcon  />
       </IconButton>
     </div>
   );

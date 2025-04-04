@@ -1,12 +1,14 @@
 import logo from './logo.png'
 import googlPlay from './googlePlay.png'
 import appStore from './appStore.png'
+import footerLogo from './footerLogo.png'
 
 
 export const assets = {
     logo,
     googlPlay,
-    appStore
+    appStore,
+    footerLogo
 }
 
 export const menuLists=[

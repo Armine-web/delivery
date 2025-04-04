@@ -11,7 +11,7 @@ const Footer = () => {
     <div className='footer' id='footer'>
       <div className="footer-content">
         <div className="footer-content-left">
-            <img className='footer-logo' src={assets.logo} alt="logo" />
+            <img className='footer-logo' src={assets.footerLogo} alt="logo" />
             <div className="footer-social-icons">
             <FacebookIcon />
             <TelegramIcon />
