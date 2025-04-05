@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Navbar from './components/navbar/Navbar'
+import Navbar from './components/navbar/navbar'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/home/home'
 import Cart from './pages/cart/cart'
@@ -22,8 +22,8 @@ const App = () => {
             path='/delivery' 
             element={<Home showAbout={showAbout} setShowAbout={setShowAbout} />} 
           /> 
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/order' element={<PlaceOrder />} />
+          <Route path='/delivery/cart' element={<Cart />} />
+          <Route path='/delivery/order' element={<PlaceOrder />} />
         </Routes>
       </div>
       <Footer />

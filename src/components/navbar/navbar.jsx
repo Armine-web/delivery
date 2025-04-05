@@ -52,7 +52,7 @@ function Navbar({ setShowLogin, handleSearch, setSearchQuery }) {
             <SearchIcon sx={{ color: '#495579', fontSize: '28px' }} />
           </IconButton>
         )}
-        <Link to="/cart">
+        <Link to="/delivery/cart">
           <IconButton>
             <ShoppingCartIcon sx={{ color: '#495579', fontSize: '28px' }} />
             <CartBadge badgeContent={totalItemsInCart > 0 ? totalItemsInCart : null} overlap="circular" />

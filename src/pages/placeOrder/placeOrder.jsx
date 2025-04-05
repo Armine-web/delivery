@@ -18,7 +18,7 @@ const PlaceOrder = () => {
         <p className='title'> Delivery Information</p>
         <div className="multy-fields">
           <TextField
-            id="outlined-multiline-flexible"
+            id="outlined-multiline-flexible-name"
             label="First Name"
             multiline
             maxRows={4}
@@ -43,7 +43,7 @@ const PlaceOrder = () => {
                   }}
            />
            <TextField
-              id="outlined-multiline-flexible"
+              id="outlined-multiline-flexible-last-name"
               label="Last Name"
               multiline
               maxRows={4}
@@ -69,7 +69,7 @@ const PlaceOrder = () => {
           />               
         </div>
         <TextField
-            id="outlined-multiline-flexible"
+            id="outlined-multiline-flexible-email"
             label="Email address"
             multiline
             maxRows={4}
@@ -94,7 +94,7 @@ const PlaceOrder = () => {
                   }}
            />
            <TextField
-              id="outlined-multiline-flexible"
+              id="outlined-multiline-flexible-street"
               label="Street"
               multiline
               maxRows={4}
@@ -121,7 +121,7 @@ const PlaceOrder = () => {
       
       <div className="multy-fields">
           <TextField
-            id="outlined-multiline-flexible"
+            id="outlined-multiline-flexible-city"
             label="City"
             multiline
             maxRows={4}
@@ -147,7 +147,7 @@ const PlaceOrder = () => {
            />
 
            <TextField
-              id="outlined-multiline-flexible"
+              id="outlined-multiline-flexible-state"
               label="State"
               multiline
               maxRows={4}
@@ -200,7 +200,7 @@ const PlaceOrder = () => {
                   }}
            />
            <TextField
-              id="outlined-multiline-flexible"
+              id="outlined-multiline-flexible-country"
               label="Country"
               multiline
               maxRows={4}
@@ -226,7 +226,7 @@ const PlaceOrder = () => {
           />               
         </div>
         <TextField
-              id="outlined-multiline-flexible"
+              id="outlined-multiline-flexible-phone"
               label="Phone"
               multiline
               maxRows={4}

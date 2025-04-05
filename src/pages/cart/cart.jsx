@@ -61,7 +61,7 @@ const Cart = () => {
             </div>
           </div>
           <Button
-            onClick={() => navigate('/order')}
+            onClick={() => navigate('/delivery/order')}
             sx={{
               color: '#ff6600',
               '&:hover': {
