@@ -6,12 +6,13 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import './loginPopup.css';
 
-const LoginPopup = ({ setShowLogin }) => {
-  const [currentState, setCurrentState] = useState('Login');
+const LoginPopup = ({ setShowLogin, handleLogin }) => {
+  const [currentState, setCurrentState] = useState('Login'); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
+  const [signupSuccess, setSignupSuccess] = useState(false); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,28 +21,40 @@ const LoginPopup = ({ setShowLogin }) => {
       password,
       ...(currentState === 'Sign Up' && { name }), 
     };
-
+  
     try {
       if (currentState === 'Sign Up') {
         await axios.post('http://localhost:5001/users', userData);
         setMessage(`Hi ${name}, your account has been created successfully!`);
+        setSignupSuccess(true); 
       } else {
         const response = await axios.get('http://localhost:5001/users');
         const user = response.data.find(
           (user) => user.email === email && user.password === password
         );
-
+  
         if (user) {
           setMessage('Login successful!');
+          handleLogin(user.name); 
+          setShowLogin(false); 
         } else {
-          setMessage('Invalid credentials!'); 
+          setMessage('Invalid credentials!');
         }
       }
     } catch (error) {
       console.error('Error during authentication:', error);
-      setMessage('An error occurred! Please try again later.'); 
+      setMessage('An error occurred! Please try again later.');
     }
   };
+  
+
+
+  if (signupSuccess) {
+    
+      setCurrentState('Login'); 
+      setSignupSuccess(false);  
+  
+  }
 
   return (
     <div className="login-popup">

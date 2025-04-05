@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import './navbar.css';
 import { assets } from '../../assets/assets';
-import SearchBar from '../searchBar/searchBar';
 import { Link } from 'react-router-dom';
 import { Button, Box, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -19,16 +18,34 @@ const CartBadge = styled(Badge)`
   }
 `;
 
-function Navbar({ setShowLogin, handleSearch, setSearchQuery }) {
+function Navbar({ userName, setShowLogin, handleLogout, setUserName }) {
   const [menu, setMenu] = useState('home');
   const [searchVisible, setSearchVisible] = useState(false);
-  const { cartItems } = useContext(StoreContext); 
+  const { cartItems } = useContext(StoreContext);
   const totalItemsInCart = Object.values(cartItems).reduce((acc, quantity) => acc + quantity, 0);
 
+  const [buttonText, setButtonText] = useState(userName ? `Hi ${userName}` : 'Sign in');
+
+  const handleMouseOut = () => {
+    setButtonText(userName ? `Hi ${userName}` : 'Sign in');
+  };
+  
+  const handleMouseOver = () => {
+    if (userName) {
+      setButtonText('Log out');
+    }
+  };
+  
+ 
+
   const handleHomeClick = () => {
-    setSearchQuery('');
-    setSearchVisible(false);
     setMenu('home');
+  };
+
+  const handleSignOut = () => {
+    setUserName(null);
+    setButtonText('Sign in'); 
+    handleLogout();
   };
 
   return (
@@ -46,7 +63,7 @@ function Navbar({ setShowLogin, handleSearch, setSearchQuery }) {
 
       <div className="navbar-right">
         {searchVisible ? (
-          <SearchBar handleSearch={handleSearch} />
+          <SearchBar />
         ) : (
           <IconButton onClick={() => setSearchVisible(true)}>
             <SearchIcon sx={{ color: '#495579', fontSize: '28px' }} />
@@ -59,16 +76,31 @@ function Navbar({ setShowLogin, handleSearch, setSearchQuery }) {
           </IconButton>
         </Link>
 
-        <Button
-          onClick={() => setShowLogin(true)}
-          variant="contained"
-          sx={{
-            backgroundColor: '#06b301',
-            '@media (max-width: 1050px)': { padding: '7px 15px' },
-          }}
-        >
-          Sign in
-        </Button>
+        {userName ? (
+          <Button
+            onClick={handleSignOut}
+            variant="contained"
+            sx={{
+              backgroundColor: '#06b301',
+              '@media (max-width: 1050px)': { padding: '7px 15px' },
+            }}
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
+          >
+            {buttonText}
+          </Button>
+        ) : (
+          <Button
+            onClick={() => setShowLogin(true)}
+            variant="contained"
+            sx={{
+              backgroundColor: '#06b301',
+              '@media (max-width: 1050px)': { padding: '7px 15px' },
+            }}
+          >
+            Sign in
+          </Button>
+        )}
       </div>
     </Box>
   );
