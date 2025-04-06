@@ -8,6 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { badgeClasses } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { StoreContext } from '../../context/storeContext';
+import SearchBar from '../searchBar/searchBar';
 
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
