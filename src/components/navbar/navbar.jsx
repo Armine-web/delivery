@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import { StoreContext } from '../../context/storeContext';
 import SearchBar from '../searchBar/searchBar';
 
+
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
     top: -12px;
@@ -19,7 +20,7 @@ const CartBadge = styled(Badge)`
   }
 `;
 
-function Navbar({ userName, setShowLogin, handleLogout, setUserName }) {
+function Navbar({ userName, setShowLogin, handleLogout, setUserName, setSearchQuery }) {
   const [menu, setMenu] = useState('home');
   const [searchVisible, setSearchVisible] = useState(false);
   const { cartItems } = useContext(StoreContext);
@@ -40,6 +41,8 @@ function Navbar({ userName, setShowLogin, handleLogout, setUserName }) {
  
 
   const handleHomeClick = () => {
+    setSearchQuery('');
+    setSearchVisible(false);
     setMenu('home');
   };
 

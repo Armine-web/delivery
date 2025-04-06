@@ -10,6 +10,7 @@ import Navbar from './components/navbar/navbar';
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [userName, setUserName] = useState(null);
+  const [showAbout, setShowAbout] = useState(false)
 
   const handleLogin = (name) => {
     setUserName(name); 
@@ -27,7 +28,7 @@ const App = () => {
       <div className='app'>
         <Navbar userName={userName} setShowLogin={setShowLogin} handleLogout={handleLogout} setUserName={setUserName} />
         <Routes>
-          <Route path='/delivery' element={<Home />} />
+          <Route path='/delivery' element={<Home showAbout={showAbout} setShowAbout={setShowAbout} />}  />
           <Route path='/delivery/cart' element={<Cart />} />
           <Route path='/delivery/order' element={<PlaceOrder />} />
         </Routes>
