@@ -1,17 +1,11 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Armine",
-      "email": "armine@example.com",
-      "password": "12345"
-    },
-    {
       "id": "3cca",
       "email": "anna@example.com",
       "password": "123123",
       "name": "Anna"
     }
-
+   
   ]
 }

@@ -39,6 +39,7 @@ const LoginPopup = ({ setShowLogin, handleLogin }) => {
           handleLogin(user);
           setShowLogin(false);
         }
+        setMessage('The login or password is incorrect!')
       }
     } catch (error) {
       console.error('Error during authentication:', error);
