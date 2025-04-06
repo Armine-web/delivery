@@ -34,9 +34,8 @@
         gap: 20px;
         font-size: 17px;
     }
-
-    .navbar-right {
-        gap: 15px;
+    .navbar-right{
+        gap: 20px;
     }
 
    
@@ -44,17 +43,37 @@
 
 @media (max-width: 900px) {
     .navbar-menu {
-        gap: 15px;
         font-size: 16px;
     }
     .navbar-menu {
         display: none;
     }
 }
-@media (max-width: 750px) {
-    .navbar-right {
-        gap: 14px;
+
+@media (max-width: 550px) {
+    .navbar-logo{
+        width: 40px;
     }
-   
+    .css-u3ezn2-MuiButtonBase-root-MuiButton-root{
+        padding: 4px 2px !important;
+        font-size: 10px !important;
+    }
+
+    .css-1t2o71x-MuiButtonBase-root-MuiButton-root{
+        padding: 4px 2px !important;
+        font-size: 10px !important;
+    }
+
+    .css-1wv1py4-MuiFormControl-root-MuiTextField-root .MuiOutlinedInput-root{
+        font-size: 12px;
+        width: 80px;
+        margin-left: 10px;
+    }
+
+    .css-4ngsfd-MuiBadge-root .MuiBadge-badge{
+        font-size: 12px;
+        padding: 1px;
+    }
 }
+
 

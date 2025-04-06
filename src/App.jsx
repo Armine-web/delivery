@@ -10,25 +10,31 @@ import Navbar from './components/navbar/navbar';
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [userName, setUserName] = useState(null);
-  const [showAbout, setShowAbout] = useState(false)
+  const [showAbout, setShowAbout] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleLogin = (name) => {
-    setUserName(name); 
+  const handleLogin = (user) => {
+    setUserName(user.name); 
+    window.localStorage.setItem('userId', user.id);
     setShowLogin(false);  
-     
   };
 
   const handleLogout = () => {
-    setUserName(null); 
+    setUserName(null);
+    window.localStorage.removeItem('userId');
   };
 
   return (
     <>
       {showLogin && <LoginPopup setShowLogin={setShowLogin} handleLogin={handleLogin}  />}
       <div className='app'>
-        <Navbar userName={userName} setShowLogin={setShowLogin} handleLogout={handleLogout} setUserName={setUserName} />
-        <Routes>
-          <Route path='/delivery' element={<Home showAbout={showAbout} setShowAbout={setShowAbout} />}  />
+        <Navbar  userName={userName} 
+          setShowLogin={setShowLogin} 
+          handleLogout={handleLogout} 
+          setUserName={setUserName} 
+          setSearchQuery={setSearchQuery} />
+          <Routes>
+          <Route path='/delivery' element={<Home showAbout={showAbout} setShowAbout={setShowAbout} />} />
           <Route path='/delivery/cart' element={<Cart />} />
           <Route path='/delivery/order' element={<PlaceOrder />} />
         </Routes>

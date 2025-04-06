@@ -2,6 +2,13 @@
     margin-top: 100px;
 }
 
+.empty-cart{
+    margin: 16vh 0;
+    font-size: 20px;
+    color:#ff6600;
+    text-align: center;
+}
+
 .cart-items-title {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 1fr 0.5fr;

@@ -6,9 +6,17 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 
+
 const Cart = () => {
+  const userId = window.localStorage.getItem('userId');
   const { cartItems, RecipeList, removeFromCart, getTotalAmount } = useContext(StoreContext);
   const navigate = useNavigate();
+  
+  if (!userId) {
+    return <div className="empty-cart">Please log in to view your cart.</div>;
+  }
+
+ 
 
   return (
     <div className='cart'>
@@ -106,7 +114,7 @@ const Cart = () => {
                     backgroundColor: '#ff6600', 
                     color: '#fff', 
                   },
-                }}>
+                }} >
                 Submit
               </Button>
             </div>
@@ -114,7 +122,8 @@ const Cart = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
+
 
 export default Cart;

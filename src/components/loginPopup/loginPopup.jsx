@@ -35,10 +35,9 @@ const LoginPopup = ({ setShowLogin, handleLogin }) => {
   
         if (user) {
           setMessage('Login successful!');
-          handleLogin(user.name); 
-          setShowLogin(false); 
-        } else {
-          setMessage('Invalid credentials!');
+          window.localStorage.setItem('userId', user.id);
+          handleLogin(user);
+          setShowLogin(false);
         }
       }
     } catch (error) {

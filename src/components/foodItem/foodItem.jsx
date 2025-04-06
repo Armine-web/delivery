@@ -35,7 +35,7 @@ function FoodItem({ id, name, image, servings, rating }) {
               backgroundColor: 'white'
             }}
           />
-        ) : (
+        ) : ( 
           <div className="food-item-container">
             <span className="food-item-container-remove" onClick={() => removeFromCart(id)}>-</span>
             <p>{cartItems[id]}</p>

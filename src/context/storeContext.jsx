@@ -5,36 +5,50 @@ export const StoreContext = createContext(null);
 
 export const StoreContextProvider = (props) => {
   const [foodData, setFoodData] = useState([]);
-  const [cartItems, setCartItems] = useLocalStorage('cartItems', {});  
+  const [cartItems, setCartItems] = useLocalStorage('cartItems', {});
   const [searchQuery, setSearchQuery] = useState('');
+  const [showLogin, setShowLogin] = useState(false);
+  
+  const userId = window.localStorage.getItem('userId');
+
+ 
+  const getCartItemsForUser = () => {
+    if (!userId) return {}; 
+    return cartItems[userId] || {}; 
+  }
 
   const addToCart = (itemId) => {
+    const userId = window.localStorage.getItem('userId'); 
+    if (!userId) {
+      setShowLogin(true); 
+      return;
+    }
     setCartItems((prev) => {
-      const newCart = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
-      return newCart;
+      const userCart = prev[userId] || {}; 
+      const updatedCart = { ...userCart, [itemId]: (userCart[itemId] || 0) + 1 };
+      return { ...prev, [userId]: updatedCart }; 
     });
   };
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => {
-      const newCart = { ...prev };
-      if (newCart[itemId] > 1) {
-        newCart[itemId] -= 1;
+      const userCart = prev[userId] || {}; 
+      if (userCart[itemId] > 1) {
+        userCart[itemId] -= 1;  
       } else {
-        delete newCart[itemId]; 
+        delete userCart[itemId];
       }
-      return newCart;
+      return { ...prev, [userId]: userCart }; 
     });
   };
 
   const getTotalAmount = () => {
+    const cartForUser = getCartItemsForUser();
     let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        const itemInfo = foodData.find((product) => String(product.id) === String(item));
-        if (itemInfo) {
-          totalAmount += itemInfo.servings * cartItems[item];
-        }
+    for (const item in cartForUser) {
+      const itemInfo = foodData.find((product) => String(product.id) === String(item));
+      if (itemInfo) {
+        totalAmount += itemInfo.servings * cartForUser[item];
       }
     }
     return totalAmount;
@@ -55,7 +69,7 @@ export const StoreContextProvider = (props) => {
 
   const contextValue = {
     RecipeList: foodData,
-    cartItems: cartItems, 
+    cartItems: getCartItemsForUser(), 
     addToCart: addToCart,
     removeFromCart: removeFromCart,
     setCartItems: setCartItems,
